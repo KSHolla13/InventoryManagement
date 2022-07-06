@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>Reader</title>
+{% endblock title %} 
+
+{% block content %}
+<div class='container'>
+</br>
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{% static 'images/image4.jpg' %}" alt="image4"  width="500" height="270">
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'images/image2.jpg' %}" alt="image2" width="500" height="270">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-3">
+            <center><h2>Welcome to the Book Stores!</h2></center>
+            <center><h3>'Reading is dreaming with open eyes'</h3></center>
+            <center><a href="{% url 'storelist' %}"><button type="button" class="btn btn-primary btn-lg mt-2">View Stores</button></a></center>
+        </div>
+    </div>
+</div>   
+{% endblock content %}
+         

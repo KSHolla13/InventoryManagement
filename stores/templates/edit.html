@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>Edit</title>
+{% endblock title %}
+
+{% block content %}
+<div class='container'>
+</br>
+    {% if book_obj.manage == request.user %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label  class="form-label">Title of the book </label>
+                <input type="text" class="form-control" name="Book" placeholder="{{ book_obj.Book }}" value="{{ book_obj.Book }}">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Author</label>
+                <input type="text" class="form-control"  name="author" placeholder="{{ book_obj.author }}" value="{{ book_obj.author }}">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Published date</label>
+                <input type="text" class="form-control" name="published" placeholder="{{ book_obj.published }}" value="{{ book_obj.published }}">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Count</label>
+                <input type="text" class="form-control"  name="count" placeholder="{{ book_obj.count }}" value="{{ book_obj.count }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update book</button>
+        </form>
+    {% else %} 
+        <p>Access Restricted.</p>
+    {% endif %}    
+</div>    
+{% endblock content %}

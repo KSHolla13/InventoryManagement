@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>home</title>
+{% endblock title %}
+
+{% block content %}
+<div class='container'>
+</br>
+</br>
+<div class="row mt-1">
+  <div class="col-md-6 offset-md-3">
+      <center><h2>Store Name :- {{ user.Store_Name }} </h2></center>
+  </br>
+  </div>
+</div>      
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>   
+  {% endfor %}
+{% endif %}
+    <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th class="col-3">Book</th>
+            <th class="col-3">Author</th>
+            <th class="col-1.5">Published</th>
+            <th class="col-1.5">Stock</th>
+            <th class="col-1.5">Edit</th>
+            <th class="col-1.5">Delete</th> 
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in all_books %}
+          <tr>
+            <th scope="row">{{ obj.Book }}</th>
+            <td>{{ obj.author }}</td>
+            <td>{{ obj.published }}</td>
+            {% if obj.count == 0 %}
+              <td>Out of Stock</td>
+            {% else %}
+              <td>{{ obj.count }}</td>
+            {% endif %}
+            <td><a href="{% url 'edit_book' obj.id %}">Edit</a></td>
+            <td><a href="{% url 'delete_book' obj.id %}">Delete</a></td>
+          </tr> 
+       {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'Addbook' %}" role="button">Add a Book</a>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item"><a class="page-link" href="?pg=1">First</a></li>
+        {% if all_books.has_previous %}
+          <li class="page-item"><a class="page-link" href="?pg={{ all_books.previous_page_number }}">{{ all_books.previous_page_number }}</a></li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="?pg={{ all_books.number }}">{{ all_books.number }}</a></li>
+        {% if all_books.has_next %}
+          <li class="page-item"><a class="page-link" href="?pg={{ all_books.next_page_number }}">{{ all_books.next_page_number }}</a></li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="?pg={{ all_books.paginator.num_pages }}">Last</a></li>
+      </ul>
+    </nav>
+</div>   
+{% endblock content %}
