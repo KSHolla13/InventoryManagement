@@ -32,7 +32,11 @@
             <th scope="row">{{ obj.Book }}</th>
             <td>{{ obj.author }}</td>
             <td>{{ obj.published }}</td>
-            <td>{{ obj.count }}</td>
+            {% if obj.count == 0 %}
+              <td>Out of Stock</td>
+            {% else %}
+              <td>{{ obj.count }}</td>
+            {% endif %}
           </tr> 
        {% endfor %}
         </tbody>
